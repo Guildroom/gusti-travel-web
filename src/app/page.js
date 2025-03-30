@@ -6,7 +6,7 @@ export default function Home() {
       <div className="w-full pt-8 min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="flex justify-center items-center flex-col pt-4">
           <h2 className="text-xl pt-8 font-bold text-[#526b5c] flex items-center justify-center text-center">
-            Gusti Travel - Bali's Eco Adventures, Local Soul, Unmatched Journeys
+            Gusti Travel - Bali’s Eco Adventures, Local Soul, Unmatched Journeys
           </h2>
 
           <h2 className="text-xl font-bold text-[#526b5c] flex items-center justify-center pt-8">

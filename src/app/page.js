@@ -54,7 +54,7 @@ export default function Home() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
-          <div className="p-6 sm:px-8 flex items-center justify-end flex-col">
+          <div className="p-6 sm:px-8 flex items-center justify-end flex-col lg:order-first order-last">
             <p className="mt-2 text-gray-700">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

@@ -4,7 +4,7 @@ export default function Header() {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-            <a className="text-teal-600 flex items-center gap-4" href="#">
+            <a className="text-teal-600 flex items-center gap-4" href="/">
               <span className="sr-only">Home</span>
               <svg
                 className="h-8"
@@ -29,7 +29,7 @@ export default function Header() {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/"
                   >
                     Home
                   </a>
@@ -38,7 +38,7 @@ export default function Header() {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/tour"
                   >
                     Tour
                   </a>
@@ -47,7 +47,7 @@ export default function Header() {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/activity"
                   >
                     Activity
                   </a>
@@ -56,7 +56,7 @@ export default function Header() {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/transport"
                   >
                     Transport
                   </a>

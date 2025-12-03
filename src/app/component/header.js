@@ -1,6 +1,30 @@
+"use client";
+
+const tourCategories = [
+  "Spiritual Healing",
+  "Cultural",
+  "Nature & Adventure",
+  "Honeymoon",
+  "Instagram Tour",
+  "Family Tour",
+  "Foodie Tour",
+  "Complete Bali",
+  "Hidden Bali Tour",
+  "Ocean Tour",
+];
+
+const activityCategories = [
+  "Water Sports",
+  "Cooking",
+  "Wellness",
+  "Adventure",
+  "Cultural",
+  "Craft",
+];
+
 export default function Header() {
   return (
-    <header className="z-50 bg-white fixed top-0 left-0 right-0">
+    <header className="z-50 bg-white fixed top-0 left-0 right-0 shadow-sm group/header">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -35,30 +59,56 @@ export default function Header() {
                   </a>
                 </li>
 
-                <li>
+                <li className="group/nav">
                   <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-gray-500 transition hover:text-gray-500/75 cursor-pointer flex items-center gap-1"
                     href="/tour"
                   >
                     Tour
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </a>
                 </li>
 
-                <li>
+                <li className="group/nav">
                   <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-gray-500 transition hover:text-gray-500/75 cursor-pointer flex items-center gap-1"
                     href="/activity"
                   >
                     Activity
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </a>
                 </li>
 
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/transport"
+                    href="/Gusti-Foundation"
                   >
-                    Transport
+                    Why Us
                   </a>
                 </li>
               </ul>
@@ -67,8 +117,10 @@ export default function Header() {
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
                 <a
-                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-                  href="#"
+                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-700 transition"
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hello%20Gusti%20Travel!%20I%27m%20interested%20and%20would%20like%20to%20know%20more%20about%20your%20tours%20and%20activities.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Contact Us
                 </a>
@@ -91,6 +143,51 @@ export default function Header() {
                     />
                   </svg>
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Expanded Mega Menu */}
+        <div className="max-h-0 overflow-hidden group-hover/nav:max-h-96 group-hover/header:max-h-96 transition-all duration-300 ease-in-out">
+          <div className="py-6 border-t border-gray-200">
+            <div className="grid grid-cols-2 gap-8">
+              {/* Tour Categories */}
+              <div>
+                <h3 className="text-lg font-bold text-teal-600 mb-4">
+                  Tour Categories
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {tourCategories.map((category) => (
+                    <a
+                      key={category}
+                      href={`/tour?category=${encodeURIComponent(category)}`}
+                      className="px-3 py-2 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600 rounded-md transition"
+                    >
+                      {category}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Activity Categories */}
+              <div>
+                <h3 className="text-lg font-bold text-purple-600 mb-4">
+                  Activity Categories
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {activityCategories.map((category) => (
+                    <a
+                      key={category}
+                      href={`/activity?category=${encodeURIComponent(
+                        category
+                      )}`}
+                      className="px-3 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-md transition"
+                    >
+                      {category}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

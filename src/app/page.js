@@ -1,131 +1,186 @@
-"use client";
+import QuizSection from "./component/QuizSection";
 
-import { useState } from "react";
-
-const questions = [
+const recommendedTours = [
   {
     id: 1,
-    question: "How Long Is Your Stay?",
-    options: ["1", "2", "3", "4", "5", "6", "7"],
+    name: "Spiritual Healing Journey",
+    category: "Spiritual Healing",
+    location: "Ubud",
+    duration: "3 Days",
+    price: "$299",
+    description:
+      "Experience inner peace through traditional Balinese healing rituals",
   },
   {
     id: 2,
-    question: "What Did You Seek?",
-    options: [
-      "Spiritual Healing",
-      "Cultural",
-      "Conservation ",
-      "Nature & Adventure ",
-      "Hikking & Trekking",
-      "Honeymoon ",
-      "Instagram Tour",
-      "Family Tour",
-      "Foodie Tour",
-      "Complate Bali ",
-      "Hidden Bali Tour",
-      "Ocean Tour",
-      "Group ",
-      "Safari & Wildlifes",
-      "Luxury",
-    ],
+    name: "Instagram Worthy Tour",
+    category: "Instagram Tour",
+    location: "Various",
+    duration: "2 Days",
+    price: "$249",
+    description: "Visit the most photogenic spots in Bali",
   },
   {
     id: 3,
-    question: "Where do you want to go?",
-    options: ["Denpasar", "Buleleng", "Taiwan", "Ansterdam"],
+    name: "Complete Bali Experience",
+    category: "Complete Bali",
+    location: "All Bali",
+    duration: "7 Days",
+    price: "$899",
+    description: "The ultimate Bali tour covering all major attractions",
+  },
+];
+
+const recommendedActivities = [
+  {
+    id: 1,
+    name: "Traditional Balinese Cooking Class",
+    category: "Cooking",
+    location: "Ubud",
+    duration: "4 Hours",
+    price: "$45",
+    description: "Learn to cook authentic Balinese dishes with local chefs",
+  },
+  {
+    id: 2,
+    name: "Scuba Diving Adventure",
+    category: "Water Sports",
+    location: "Amed",
+    duration: "Half Day",
+    price: "$89",
+    description: "Explore underwater beauty and coral reefs",
+  },
+  {
+    id: 3,
+    name: "Sunrise Yoga Session",
+    category: "Wellness",
+    location: "Canggu",
+    duration: "2 Hours",
+    price: "$25",
+    description: "Start your day with peaceful yoga overlooking rice fields",
   },
 ];
 
 export default function Home() {
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
-
-  const handleSelect = (questionId, option) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: option }));
-    setStep((prev) => prev + 1);
-  };
-
   return (
     <>
-      <div className="pt-24" />
-      <section
-        className="relative h-screen pt-24 bg-cover bg-center text-white flex items-center justify-center"
-        style={{ backgroundImage: "url('/background.jpg')" }}
-      >
-        {/* Background overlay */}
-        <div className="absolute inset-0 bg-opacity-40 z-0"></div>
+      <QuizSection />
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 flex flex-col items-center">
-          {!showQuiz ? (
-            <>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                Welcome to our website
-              </h1>
-              <p className="text-lg md:text-xl mb-6">
-                Every Soul Seeks a Different Bali. Let's Find Yours
-              </p>
-              <button
-                onClick={() => setShowQuiz(true)}
-                className="flex items-center gap-2 bg-teal-600 text-white px-6 py-3 rounded-md shadow-lg hover:bg-teal-700 transition"
+      {/* Recommended Tours Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Recommended Tours
+            </h2>
+            <p className="text-lg text-gray-600">
+              Discover our most popular tour packages
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {recommendedTours.map((tour) => (
+              <a
+                key={tour.id}
+                href={`/tour/detail?id=${tour.id}`}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-                Get Started
-              </button>
-            </>
-          ) : step < questions.length ? (
-            <div className="max-w-xl mx-auto space-y-6 bg-opacity-10 rounded-lg ">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                {questions[step].question}
-              </h1>
-              <div className="grid grid-cols-4 gap-4">
-                {questions[step].options.map((opt) => (
-                  <button
-                    key={opt}
-                    onClick={() => handleSelect(questions[step].id, opt)}
-                    className="px-4 py-2 rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="max-w-xl mx-auto p-6 space-y-6 bg-opacity-10 rounded-lg backdrop-blur-md">
-              <h2 className="text-2xl font-bold mb-4">Your Answers</h2>
-              <ul className="list-disc pl-6 text-left text-white space-y-2">
-                {questions.map((q) => (
-                  <li key={q.id}>
-                    {q.question} →{" "}
-                    <span className="font-medium">{answers[q.id]}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => {
-                  setStep(0);
-                  setAnswers({});
-                  setShowQuiz(false);
-                }}
-                className="mt-6 bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 transition"
+                <div className="h-48 bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center">
+                  <span className="text-white text-6xl">🏝️</span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    {tour.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {tour.description}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <span>📍 {tour.location}</span>
+                    <span>⏱️ {tour.duration}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-teal-600">
+                      {tour.price}
+                    </span>
+                    <span className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition inline-block">
+                      View Details
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a
+              href="/tour"
+              className="inline-block bg-teal-600 text-white px-8 py-3 rounded-md hover:bg-teal-700 transition font-semibold"
+            >
+              View All Tours
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Recommended Activities Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Recommended Activities
+            </h2>
+            <p className="text-lg text-gray-600">
+              Experience the best activities Bali has to offer
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {recommendedActivities.map((activity) => (
+              <a
+                key={activity.id}
+                href={`/activity/detail?id=${activity.id}`}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
               >
-                Start Your Jurney
-              </button>
-            </div>
-          )}
+                <div className="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                  <span className="text-white text-6xl">
+                    {activity.category === "Water Sports" && "🏄"}
+                    {activity.category === "Cooking" && "🍳"}
+                    {activity.category === "Wellness" && "🧘"}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    {activity.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {activity.description}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <span>📍 {activity.location}</span>
+                    <span>⏱️ {activity.duration}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-purple-600">
+                      {activity.price}
+                    </span>
+                    <span className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition inline-block">
+                      View Details
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a
+              href="/activity"
+              className="inline-block bg-purple-600 text-white px-8 py-3 rounded-md hover:bg-purple-700 transition font-semibold"
+            >
+              View All Activities
+            </a>
+          </div>
         </div>
       </section>
     </>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const activities = [
   {
@@ -186,7 +187,7 @@ const activities = [
   },
 ];
 
-export default function ActivityDetailPage() {
+function ActivityDetailContent() {
   const searchParams = useSearchParams();
   const activityId = searchParams.get("id");
 
@@ -410,5 +411,22 @@ export default function ActivityDetailPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ActivityDetailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center pt-24">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading activity details...</p>
+          </div>
+        </div>
+      }
+    >
+      <ActivityDetailContent />
+    </Suspense>
   );
 }

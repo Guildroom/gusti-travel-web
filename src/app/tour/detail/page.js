@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const tours = [
   {
@@ -206,7 +207,7 @@ const tours = [
   },
 ];
 
-export default function TourDetailPage() {
+function TourDetailContent() {
   const searchParams = useSearchParams();
   const tourId = searchParams.get("id");
 
@@ -418,5 +419,22 @@ export default function TourDetailPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function TourDetailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center pt-24">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading tour details...</p>
+          </div>
+        </div>
+      }
+    >
+      <TourDetailContent />
+    </Suspense>
   );
 }

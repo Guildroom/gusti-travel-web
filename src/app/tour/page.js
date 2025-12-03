@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const tours = [
@@ -130,7 +130,7 @@ const durations = [
   "7 Days",
 ];
 
-export default function TourPage() {
+function TourPageContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
@@ -315,5 +315,22 @@ export default function TourPage() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function TourPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center pt-24">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading tours...</p>
+          </div>
+        </div>
+      }
+    >
+      <TourPageContent />
+    </Suspense>
   );
 }

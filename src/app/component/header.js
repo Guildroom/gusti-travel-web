@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 const tourCategories = [
   "Spiritual Healing",
   "Cultural",
@@ -23,15 +25,20 @@ const activityCategories = [
 ];
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <header className="z-50 bg-white fixed top-0 left-0 right-0 shadow-sm group/header">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex-1 md:flex md:items-center md:gap-12">
-            <a className="text-teal-600 flex items-center gap-4" href="/">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex items-center flex-1 min-w-0">
+            <a
+              className="text-teal-600 flex items-center gap-2 sm:gap-4"
+              href="/"
+            >
               <span className="sr-only">Home</span>
               <svg
-                className="h-8"
+                className="h-6 sm:h-8 flex-shrink-0"
                 viewBox="0 0 28 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +48,7 @@ export default function Header() {
                   fill="currentColor"
                 />
               </svg>
-              <span className=" text-black font-bold text-2xl">
+              <span className="text-black font-bold text-lg sm:text-2xl truncate">
                 Gusti Travel
               </span>
             </a>
@@ -115,9 +122,9 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
+              <div className="hidden sm:flex sm:gap-4">
                 <a
-                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-700 transition"
+                  className="rounded-md bg-teal-600 px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-white shadow-sm hover:bg-teal-700 transition"
                   href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hello%20Gusti%20Travel!%20I%27m%20interested%20and%20would%20like%20to%20know%20more%20about%20your%20tours%20and%20activities.`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -127,37 +134,116 @@ export default function Header() {
               </div>
 
               <div className="block md:hidden">
-                <button className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                >
+                  {mobileMenuOpen ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="size-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="size-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  )}
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Expanded Mega Menu */}
-        <div className="max-h-0 overflow-hidden group-hover/nav:max-h-96 group-hover/header:max-h-96 transition-all duration-300 ease-in-out">
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            mobileMenuOpen ? "max-h-screen" : "max-h-0"
+          }`}
+        >
+          <nav className="py-4 border-t border-gray-200">
+            <ul className="space-y-4">
+              <li>
+                <a
+                  className="block text-gray-700 font-medium hover:text-teal-600 transition"
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  className="block text-gray-700 font-medium hover:text-teal-600 transition"
+                  href="/tour"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Tour
+                </a>
+              </li>
+              <li>
+                <a
+                  className="block text-gray-700 font-medium hover:text-teal-600 transition"
+                  href="/activity"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Activity
+                </a>
+              </li>
+              <li>
+                <a
+                  className="block text-gray-700 font-medium hover:text-teal-600 transition"
+                  href="/Gusti-Foundation"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Why Us
+                </a>
+              </li>
+              <li className="pt-2">
+                <a
+                  className="block w-full rounded-md bg-teal-600 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm hover:bg-teal-700 transition"
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hello%20Gusti%20Travel!%20I%27m%20interested%20and%20would%20like%20to%20know%20more%20about%20your%20tours%20and%20activities.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        {/* Desktop Mega Menu - Hidden on Mobile */}
+        <div className="hidden md:block max-h-0 overflow-hidden group-hover/nav:max-h-96 group-hover/header:max-h-96 transition-all duration-300 ease-in-out">
           <div className="py-6 border-t border-gray-200">
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Tour Categories */}
               <div>
                 <h3 className="text-lg font-bold text-teal-600 mb-4">
                   Tour Categories
                 </h3>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {tourCategories.map((category) => (
                     <a
                       key={category}
@@ -175,7 +261,7 @@ export default function Header() {
                 <h3 className="text-lg font-bold text-purple-600 mb-4">
                   Activity Categories
                 </h3>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {activityCategories.map((category) => (
                     <a
                       key={category}
